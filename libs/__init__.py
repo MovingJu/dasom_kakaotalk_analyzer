@@ -4,4 +4,5 @@ from .Kbg import Kbg
 from .Kbg_errors import Kbg_errors
 from .formal import Formal
 from .casual import Casual
-from .tools import preprocessing, is_input_valid
+from .tools import preprocessing, is_input_valid, dict_printer
+from .finders import finder
