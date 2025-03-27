@@ -1,9 +1,8 @@
-# to do:: cry, swear등 명령어 처리 메서드 완성하기, 동일 기능 함수로 잘 빼서 만들어!!
 # reference:: https://github.com/Tanat05/korcen-ml  <- 모델 참고해서 욕설 탐지 만들기!
-## to do:: 시작시, 사용자가 직접 입력한 경우, preprocess하고 저장해서 실행하는 코드 만들기.
 
 import pandas as pd
 import glob
+import sys
 
 import libs, datas
 
@@ -39,9 +38,14 @@ def main()->None:
     
 
     if user_input == len(files_name) - 1:
-        print('채팅 로그를 입력해주세요!')
-        user_txt = input()
-        df = libs.preprocessing(user_txt)
+        lines = []
+        print("채팅기록을 입력하세요! \\stop으로 입력 종료하기")
+        while True:
+            line = input()
+            if line == "\\stop": 
+                break
+            lines.append(line)
+        df = libs.preprocessing(lines)
     
     else:
         path = files[user_input]
@@ -58,12 +62,12 @@ def execute_kbg(df: pd.DataFrame, user_input_classes: int) -> None:
     """재귀 형태로 카카오톡 분석기를 계속 실행시킬 함수"""
 
     def inner():
-        user = input("$ ").strip()
-        if user == '\\stop':
+        user = input("찾을 문자 혹은 명령어 입력 $ ").strip().split('--')
+        if user[0] == '\\stop':
             return
         
         try:
-            if user[0] == '\\':
+            if user[0][0] == '\\':
                 malloc.execute_command(user)
             else:
                 malloc.execute_text(user)
