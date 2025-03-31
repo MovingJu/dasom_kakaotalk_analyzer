@@ -12,6 +12,7 @@ class Kbg:
             "\\cry": self.cry,
             "\\swear": self.swear,
             "\\laugh": self.laugh,
+            "\\talk":self.talk,
             "\\help": self.help
         }
         return
@@ -41,6 +42,9 @@ class Kbg:
         laugh_tuple = ('ㅋㅋ','zz','ㅋㅎ','ㅋㄹ','ㅎㅋ','ㄹㅋ')
         libs.dict_printer(libs.finder(self._df, laugh_tuple))
         return
+    
+    def talk(self):
+        libs.dict_printer(libs.finder(self._df, ""))
     
     def help(self):
         print('이 클래스가 지원하는 명령어: ')
