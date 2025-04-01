@@ -3,28 +3,6 @@ import pandas as pd
 
 import libs
 
-def parse_date_range(date_range: str, log_data: list):
-    # 날짜 범위 파싱: "2025-02-24~2025-02-25"를 시작일과 종료일로 분리
-    start_date_str, end_date_str = date_range.split('~')
-    start_date = datetime.strptime(start_date_str, "%Y-%m-%d")
-    end_date = datetime.strptime(end_date_str, "%Y-%m-%d")
-
-    result = {}
-
-    # 각 로그 데이터 처리
-    for log in log_data:
-        # 로그 데이터에서 날짜, 이름, 내용 추출
-        date_str, name, content = log.split(',')
-        
-        # 로그 데이터의 날짜를 datetime 객체로 변환
-        log_date = datetime.strptime(date_str.strip(), "%Y-%m-%d %H:%M:%S")
-        
-        # 날짜가 범위 내에 있으면 딕셔너리에 추가
-        if start_date <= log_date <= end_date:
-            result[name] = content
-
-    return result
-
 def type_seper(func):
     def wrapper(df, user, key_val='name', search_val='context'):
         
